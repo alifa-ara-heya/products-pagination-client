@@ -10,8 +10,27 @@ const Shop = () => {
     const [cart, setCart] = useState([]);
     // const totalCount = useLoaderData();
     const { count } = useLoaderData();
-    console.log(count);
+    // console.log(count); //76
+    const itemsPerPage = 10;
+    const numberOfPages = Math.ceil(count / itemsPerPage);
 
+    /*  const pages = [];
+     for (let i = 0; i < numberOfPages; i++) {
+         pages.push(i)
+     } */
+
+    // shortcut way
+    const pages = [...Array(numberOfPages).keys()]
+    console.log(pages);
+
+    /* 
+    1. Get the total number of products;
+    2. number of items per page dynamic
+    3. number
+
+
+    
+    */
 
     useEffect(() => {
         fetch('http://localhost:5000/products')
@@ -85,6 +104,11 @@ const Shop = () => {
                         <button className='btn-proceed'>Review Order</button>
                     </Link>
                 </Cart>
+            </div>
+            <div className="pagination">
+                {
+                    pages.map(page => <button key={page}>{page}</button>)
+                }
             </div>
         </div>
     );
